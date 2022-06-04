@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style/signup/style.css" />
+    <script defer src="scripts/signup.js"></script>
+  </head>
+  <body class="signup">
+    <div class="container">
+      <h2 class="form-title">Sign Up</h2>
+      <form class="signup-form">
+        <div class="radio-group">
+          <p class="radio-title">Choose your account type:</p>
+          <input
+            type="radio"
+            id="student"
+            class="radio-input"
+            name="user-type"
+            value="student"
+            checked
+          />
+          <label for="student" class="radio-label">Student</label>
+          <input
+            type="radio"
+            id="professor"
+            class="radio-input"
+            name="user-type"
+            value="professor"
+          />
+          <label for="professor" class="radio-label">Professor</label>
+          <div class="input-group">
+            <div for="firstname" class="label">First Name</div>
+            <input type="text" id="first-name" class="input" />
+          </div>
+          <div class="input-group">
+            <div for="lastname" class="label">Last Name</div>
+            <input type="text" id="last-name" class="input" />
+          </div>
+          <div class="input-group">
+            <div for="password" class="label">Password</div>
+            <input type="password" id="password" class="input" />
+          </div>
+          <div class="input-group">
+            <div for="confirm-password" class="label">Confirm Password</div>
+            <input type="password" id="confirm-password" class="input" />
+          </div>
+          <div class="input-group">
+            <div for="email" class="label">Email</div>
+            <input type="Email" id="email" class="input" />
+          </div>
+          <div class="input-group">
+            <div for="gpa" class="label">GPA</div>
+            <input type="text" id="gpa" class="input" />
+          </div>
+          <div class="input-group hidden">
+            <div for="subject" class="label">Subject</div>
+            <input type="text" id="subject" class="input" />
+          </div>
+        </div>
+        <p class="error-message hidden"></p>
+        <button id="signup-btn" class="submit-button">Sign Up</button>
+        <div class="sub-section">
+          <p class="have-account-text">
+            Already have an account?
+            <a class="log-in" href="login.html">Log in</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

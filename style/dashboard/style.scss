@@ -1,0 +1,29 @@
+@import "../colors";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  color: $dark-text;
+}
+
+.header {
+  height: 50px;
+  background-color: $dark-green;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 200px;
+}
+
+.sign-out {
+  display: inline-block;
+  width: auto;
+  padding: 10px 25px;
+  background-color: $mild-green;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}

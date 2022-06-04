@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: sans-serif;
+  color: #433633;
+  background-color: #edf6f9;
+}
+
+.container {
+  max-width: 400px;
+  min-width: 215px;
+  padding: 20px 100px;
+  margin: 30px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    padding: 20px 50px;
+  }
+}
+
+.form-title {
+  margin: 10px auto;
+  font-size: 28px;
+}
+
+.signup-form {
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.label,
+.radio-label,
+.radio-title {
+  margin: 0;
+  font-size: 18px;
+  height: 20px;
+  width: 100%;
+  padding: 20px 0 5px 0;
+}
+
+.radio-title {
+  padding: 20px 0 10px 0;
+}
+
+.radio-label,
+.radio-input {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.radio-input:last-of-type {
+  margin-left: 25px;
+}
+
+.input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid #83c5be;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid #006d77;
+}
+
+.input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.submit-button {
+  color: #edf6f9;
+  font-size: 18px;
+  margin-top: 40px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #006d77;
+  width: 100%;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.submit-button:active {
+  background-color: #83c5be;
+}
+
+.sub-section {
+  margin: 25px 0 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.have-account-text,
+.log-in {
+  margin: 0;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.log-in {
+  cursor: pointer;
+  font-weight: 600;
+  color: #006d77;
+}
+
+.error-message {
+  display: inline-block;
+  color: red;
+  width: auto;
+  position: absolute;
+  right: 0;
+  margin: 5px 100px 0 0;
+}
+/*# sourceMappingURL=style.css.map */
