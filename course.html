@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course</title>
+    <link rel="stylesheet" href="style/course/style.css" />
+    <script src="scripts/course.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <button id="dashboard" class="header-btn">Dashboard</button>
+      <button id="sign-out" class="header-btn">Sign Out</button>
+    </header>
+    <main class="main">
+      <div class="course">
+        <img src="./images/course-mild-pink.png" alt="course" />
+        <div class="course-info">
+          <div class="left-section">
+            <span class="subject-name">Math</span>
+            <div for="subject-name-input" class="label hidden">
+              Subject Name
+            </div>
+            <input type="text" id="subject-name-input" class="input hidden" />
+            <button class="submit-button hidden">Change Subject Name</button>
+          </div>
+          <div class="right-section">
+            <span class="professor-name">Professor Name</span>
+            <button class="delete-button hidden">Delete Course</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
