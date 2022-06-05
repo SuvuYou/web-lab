@@ -1,20 +1,17 @@
 const signOutBtn = document.querySelector("#sign-out");
-const profileBtn = document.querySelector("#profile");
-const addCourseBtn = document.querySelector("#add-course");
-const addCourseForm = document.querySelector(".add-course-form");
-const overlay = document.querySelector(".overlay");
+const dashboardBtn = document.querySelector("#dashboard");
 const coursesSlider = document.querySelector(".courses-list");
-const coursesToJoinSlider = document.querySelector(".courses-to-join-list");
+const requestsSlider = document.querySelector(".requests-list");
 const leftArrowCourses = document.querySelector("#left-arrow-course");
 const rightArrowCourses = document.querySelector("#right-arrow-course");
-const leftArrowCoursesToJoin = document.querySelector(
-  "#left-arrow-course-to-join"
-);
-const rightArrowCoursesToJoin = document.querySelector(
-  "#right-arrow-course-to-join"
-);
+const leftArrowRequests = document.querySelector("#left-arrow-request");
+const rightArrowRequests = document.querySelector("#right-arrow-request");
 const allCourses = document.querySelectorAll(".course");
-const allCoursesToJoin = document.querySelectorAll(".course-to-join");
+const allRequests = document.querySelectorAll(".request");
+
+// inputs
+const gpaInput = document.querySelector("#gpa");
+const subjectInput = document.querySelector("#subject");
 
 const BASE = "http://127.0.0.1:5000/";
 
@@ -64,33 +61,20 @@ const user = JSON.parse(localStorage.getItem("lab-user"));
 checkLogin(token, user);
 
 if (user.type === "professor") {
-  addCourseBtn.classList.remove("hidden");
-  document.querySelectorAll(".section-label")[1].classList.add("hidden");
-  document.querySelectorAll(".courses")[1].classList.add("hidden");
+  gpaInput.parentElement.classList.add("hidden");
+  subjectInput.parentElement.classList.remove("hidden");
 }
-
-addCourseBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  addCourseForm.classList.toggle("hidden");
-  overlay.classList.toggle("hidden");
-});
-
-overlay.addEventListener("click", (e) => {
-  e.preventDefault();
-  addCourseForm.classList.toggle("hidden");
-  overlay.classList.toggle("hidden");
-});
 
 signOutBtn.addEventListener("click", () => {
   signOut();
 });
 
-profileBtn.addEventListener("click", () => {
-  window.location.href = "profile.html";
+dashboardBtn.addEventListener("click", () => {
+  window.location.href = "dashboard.html";
 });
 
 let curCourseSlide = 0,
-  curCoursesToJoinSlide = 0;
+  curRequestsSlide = 0;
 
 leftArrowCourses.addEventListener("click", (e) => {
   e.preventDefault();
@@ -110,25 +94,21 @@ rightArrowCourses.addEventListener("click", (e) => {
   }
 });
 
-leftArrowCoursesToJoin.addEventListener("click", (e) => {
+leftArrowRequests.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (curCoursesToJoinSlide !== 0) {
-    curCoursesToJoinSlide--;
-    coursesToJoinSlider.style.transform = `translateX(-${
-      curCoursesToJoinSlide * 420
-    }px)`;
+  if (curRequestsSlide !== 0) {
+    curRequestsSlide--;
+    requestsSlider.style.transform = `translateX(-${curRequestsSlide * 420}px)`;
   }
 });
 
-rightArrowCoursesToJoin.addEventListener("click", (e) => {
+rightArrowRequests.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if (curCoursesToJoinSlide !== allCoursesToJoin.length - 1) {
-    curCoursesToJoinSlide++;
-    coursesToJoinSlider.style.transform = `translateX(-${
-      curCoursesToJoinSlide * 420
-    }px)`;
+  if (curRequestsSlide !== allRequests.length - 1) {
+    curRequestsSlide++;
+    requestsSlider.style.transform = `translateX(-${curRequestsSlide * 420}px)`;
   }
 });
 
