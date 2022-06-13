@@ -1,0 +1,41 @@
+@import "../../constants/colors";
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+  z-index: 99;
+}
+
+.add-course-form {
+  z-index: 100;
+  width: 400px;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  background-color: white;
+  transform: translateX(-50%);
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+.add-course-button {
+  color: $gray;
+  font-size: 18px;
+  margin-top: 40px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: $dark-green;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  &:active {
+    background-color: $mild-green;
+  }
+}
