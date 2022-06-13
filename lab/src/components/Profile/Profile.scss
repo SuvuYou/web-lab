@@ -1,0 +1,221 @@
+@import "../../constants/colors";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  color: $dark-text;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.sub-section {
+  margin: 25px 0 20px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.courses,
+.courses-to-join {
+  margin-bottom: 40px;
+}
+
+.courses-list,
+.courses-to-join-list {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.course,
+.course-to-join {
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  box-shadow: 4px 4px 15px 0 rgb(214, 214, 214);
+  border-radius: 10px;
+  transform: scale(1);
+  transition: transform 0.1s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+
+  &.over {
+    .disabled-text {
+      position: absolute;
+      left: 50%;
+      bottom: 50%;
+      transform: translateY(50%) translateX(-50%);
+      color: $dark-text;
+      font-size: 28px;
+      font-weight: 600;
+      z-index: 99;
+    }
+
+    &::after {
+      z-index: 98;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: $gray;
+      position: absolute;
+      border-radius: 10px;
+      opacity: 0.4;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  img {
+    width: 400px;
+    border-radius: 10px;
+    scale: 1;
+
+    &:hover {
+      scale: 2;
+    }
+  }
+}
+
+.course-info,
+.course-to-join-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
+}
+
+.subject-name {
+  font-size: 24px;
+}
+.professor-name {
+  font-size: 16px;
+}
+
+.left-arrow {
+  transform: rotate(180deg);
+}
+
+.left-arrow,
+.right-arrow {
+  border-radius: 50%;
+  background-color: rgba($color: #fff, $alpha: 0.3);
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-label,
+.courses,
+.courses-to-join {
+  padding: 10px 100px;
+
+  @media screen and (max-width: 900px) {
+    padding: 10px 50px;
+  }
+}
+
+.section-label {
+  border-bottom: 2px $dark-brown solid;
+  border-top: 2px $dark-brown solid;
+}
+
+.request-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px 10px;
+  border: 0;
+  background-color: $mild-green;
+  cursor: pointer;
+  border-radius: 5px;
+  color: $gray;
+  font-weight: 600;
+  transform: scale(1);
+  transition: transform 0.15s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.request-sended {
+  background-color: $pending;
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.4;
+}
+
+.add-course-form {
+  width: 400px;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  background-color: white;
+  transform: translateX(-50%);
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+.label {
+  margin: 0;
+  font-size: 18px;
+  height: 20px;
+  width: 100%;
+  padding: 20px 0 5px 0;
+}
+
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 15px;
+  border: 1px solid $mild-green;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $dark-green;
+  }
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+}
+
+.add-course-button {
+  color: $gray;
+  font-size: 18px;
+  margin-top: 40px;
+  padding: 10px 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: $dark-green;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  &:active {
+    background-color: $mild-green;
+  }
+}

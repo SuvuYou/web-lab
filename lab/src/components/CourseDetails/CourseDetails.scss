@@ -1,0 +1,96 @@
+@import "../../constants/colors";
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  color: $dark-text;
+  overflow-x: hidden;
+}
+
+.main {
+  padding: 10px 200px;
+
+  @media screen and (max-width: 1100px) {
+    padding: 10px 50px;
+  }
+}
+
+.course {
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 4px 4px 15px 0 rgb(214, 214, 214);
+  border-radius: 10px;
+  transform: scale(1);
+  transition: transform 0.1s ease-in-out;
+
+  img {
+    width: 400px;
+    border-radius: 10px;
+    scale: 1;
+    &:hover {
+      scale: 2;
+    }
+  }
+}
+
+.submit-button {
+  color: $gray;
+  font-size: 14px;
+  padding: 5px 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: $dark-green;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  &:active {
+    background-color: $mild-green;
+  }
+}
+
+.delete-button {
+  color: $gray;
+  font-size: 14px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: $rejected;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+
+  &:active {
+    background-color: $mild-green;
+  }
+}
+
+.course-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  gap: 30px;
+}
+
+.subject-name {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+.professor-name {
+  font-size: 16px;
+}
+
+.right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+}

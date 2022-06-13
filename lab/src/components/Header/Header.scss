@@ -1,0 +1,23 @@
+@import "../../constants/colors";
+
+.header {
+  height: 50px;
+  background-color: $dark-green;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 200px;
+}
+
+.header-btn {
+  display: inline-block;
+  width: auto;
+  padding: 10px 25px;
+  color: $gray;
+  background-color: transparent;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 22px;
+}
