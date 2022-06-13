@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import * as ROUTES from "./constants/routes";
 import useAuth from "./hookers/use-auth";
 import UserContext from "./context/user-context";

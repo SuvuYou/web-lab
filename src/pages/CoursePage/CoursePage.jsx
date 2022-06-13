@@ -31,6 +31,7 @@ const CoursePage = () => {
         const courseData = await res.json();
         setCourse(courseData);
       } catch (error) {
+        console.error(error);
       } finally {
         setIsLoading(false);
       }

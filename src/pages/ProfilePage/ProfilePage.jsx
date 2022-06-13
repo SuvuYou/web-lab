@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Profile from "../../components/Profile/Profile";
 
 const ProfilePage = () => {
