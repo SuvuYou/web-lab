@@ -1,0 +1,22 @@
+{
+  "name": "lab",
+  "version": "1.0.0",
+  "description": "lab",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.17.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuvuYou/web-lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuvuYou/web-lab/issues"
+  },
+  "homepage": "https://github.com/SuvuYou/web-lab#readme"
+}

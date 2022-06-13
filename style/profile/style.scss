@@ -185,6 +185,38 @@ body {
   padding: 10px 25px 0 25px;
 }
 
+.request-form {
+  padding: 10px 25px 10px 25px;
+
+  .request-form-btn {
+    color: $gray;
+    font-size: 16px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s ease-in-out, transform 0.05s ease-in-out;
+
+    &:hover {
+      background-color: $mild-green;
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+  }
+
+  #approve {
+    color: $resolved;
+  }
+
+  #reject {
+    color: $rejected;
+  }
+}
+
 .status {
   &--resolved,
   &--pending,
@@ -211,8 +243,13 @@ body {
 .subject-name {
   font-size: 24px;
 }
-.professor-name {
+.professor-name,
+.student-name {
   font-size: 16px;
+}
+
+.student-name {
+  margin-right: 20px;
 }
 
 .left-arrow {

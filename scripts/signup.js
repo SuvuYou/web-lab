@@ -40,7 +40,6 @@ function validateUserInput(user, userType) {
   );
 }
 
-const form = document.querySelector(".signup-form");
 const firstInput = document.querySelector("#first-name");
 const lastInput = document.querySelector("#last-name");
 const passwordInput = document.querySelector("#password");
@@ -60,7 +59,7 @@ if (token) {
 
 signupBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log("click");
+
   const userType = studentRadio.checked ? "student" : "professor";
   const confirmPassword = confirmPasswordInput.value;
 

@@ -245,6 +245,45 @@ body {
   padding: 10px 25px 0 25px;
 }
 
+.request-form {
+  padding: 10px 25px 10px 25px;
+}
+
+.request-form .request-form-btn {
+  color: #edf6f9;
+  font-size: 16px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: background-color 0.1s ease-in-out, -webkit-transform 0.05s ease-in-out;
+  transition: background-color 0.1s ease-in-out, -webkit-transform 0.05s ease-in-out;
+  transition: background-color 0.1s ease-in-out, transform 0.05s ease-in-out;
+  transition: background-color 0.1s ease-in-out, transform 0.05s ease-in-out, -webkit-transform 0.05s ease-in-out;
+}
+
+.request-form .request-form-btn:hover {
+  background-color: #83c5be;
+}
+
+.request-form .request-form-btn:active {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.request-form #approve {
+  color: #c2e812;
+}
+
+.request-form #reject {
+  color: #e34a6f;
+}
+
 .status--resolved, .status--pending, .status--rejected {
   padding: 5px 25px 10px 25px;
   display: -webkit-box;
@@ -272,8 +311,13 @@ body {
   font-size: 24px;
 }
 
-.professor-name {
+.professor-name,
+.student-name {
   font-size: 16px;
+}
+
+.student-name {
+  margin-right: 20px;
 }
 
 .left-arrow {

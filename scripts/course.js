@@ -1,13 +1,5 @@
 const signOutBtn = document.querySelector("#sign-out");
 const dashboardBtn = document.querySelector("#dashboard");
-const coursesSlider = document.querySelector(".courses-list");
-const requestsSlider = document.querySelector(".requests-list");
-const leftArrowCourses = document.querySelector("#left-arrow-course");
-const rightArrowCourses = document.querySelector("#right-arrow-course");
-const leftArrowRequests = document.querySelector("#left-arrow-request");
-const rightArrowRequests = document.querySelector("#right-arrow-request");
-const allCourses = document.querySelectorAll(".course");
-const allRequests = document.querySelectorAll(".request");
 
 const inputLabel = document.querySelector(".label");
 //inputs
@@ -19,7 +11,24 @@ const deleteBtn = document.querySelector(".delete-button");
 
 const BASE = "http://127.0.0.1:5000/";
 
-let userData = {};
+async function fetchCourse(token, id) {
+  const endpoint = `${BASE}courses/${id}`;
+
+  const res = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${token}`,
+    },
+  });
+
+  const course = await res.json();
+
+  document.querySelector(".subject-name").textContent = course.subject;
+  document.querySelector(
+    ".professor-name"
+  ).textContent = `${course.professor.first_name} ${course.professor.last_name}`;
+}
 
 function signOut() {
   localStorage.removeItem("lab-token");
@@ -55,8 +64,6 @@ async function checkLogin(token, user) {
   if (data.message) {
     return signOut();
   }
-
-  userData = data;
 }
 
 const token = localStorage.getItem("lab-token");
@@ -70,6 +77,8 @@ if (user.type === "professor") {
   subjectInput.classList.remove("hidden");
   inputLabel.classList.remove("hidden");
 }
+
+fetchCourse(token, 218);
 
 signOutBtn.addEventListener("click", () => {
   signOut();
