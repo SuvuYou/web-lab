@@ -21,6 +21,25 @@ const BASE = "http://127.0.0.1:5000/";
 
 let userData = {};
 
+async function fetchCourse(token, id) {
+  const endpoint = `${BASE}courses/${id}`;
+
+  const res = await fetch(endpoint, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${token}`,
+    },
+  });
+
+  const course = await res.json();
+
+  document.querySelector(".subject-name").textContent = course.subject;
+  document.querySelector(
+    ".professor-name"
+  ).textContent = `${course.professor.first_name} ${course.professor.last_name}`;
+}
+
 function signOut() {
   localStorage.removeItem("lab-token");
   localStorage.removeItem("lab-user");
@@ -70,6 +89,8 @@ if (user.type === "professor") {
   subjectInput.classList.remove("hidden");
   inputLabel.classList.remove("hidden");
 }
+
+fetchCourse(token, 218);
 
 signOutBtn.addEventListener("click", () => {
   signOut();

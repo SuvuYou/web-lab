@@ -60,7 +60,7 @@ if (token) {
 
 signupBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log("click");
+
   const userType = studentRadio.checked ? "student" : "professor";
   const confirmPassword = confirmPasswordInput.value;
 
