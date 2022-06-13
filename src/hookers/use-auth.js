@@ -19,7 +19,7 @@ export default function useAuth() {
   const logIn = (user, token) => {
     setUser(user);
     setToken(token);
-    localStorage.setItem("lab-user", user);
+    localStorage.setItem("lab-user", JSON.stringify(user));
     localStorage.setItem("lab-token", token);
   };
 

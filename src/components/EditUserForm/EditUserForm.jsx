@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "../../context/user-context";
 import BasicInput from "../BasicInput/BasicInput";
 import "./EditUserForm.scss";
 
 const EditUserForm = () => {
-  const [isStudent, setIsStudent] = useState(true);
+  const { user } = useContext(UserContext);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +46,7 @@ const EditUserForm = () => {
             />
           </div>
           <div classNameName="input-group">
-            {isStudent ? (
+            {user.type === "student" ? (
               <BasicInput
                 purpose={"text"}
                 label={"GPA"}

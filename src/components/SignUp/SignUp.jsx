@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BasicInput from "../BasicInput/BasicInput";
 import * as ROUTES from "../../constants/routes";
@@ -7,13 +7,11 @@ import {
   STUDENTS_ENDPOINT,
 } from "../../constants/api-endpoint";
 import "./SignUp.scss";
-import UserContext from "../../context/user-context";
 
 const isFieldValidated = (value) => value.trim() !== "";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { logIn } = useContext(UserContext);
 
   const [isStudent, setIsStudent] = useState(true);
   const [firstName, setFirstName] = useState("");

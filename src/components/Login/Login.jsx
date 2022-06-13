@@ -41,7 +41,7 @@ const Login = () => {
     }
 
     if (data.token && data.token !== "") {
-      logIn(JSON.stringify(data.user), data.token);
+      logIn(data.user, data.token);
       navigate(ROUTES.DASHBOARD, { replace: false });
     }
   };
@@ -77,7 +77,7 @@ const Login = () => {
           </button>
           <div className="sub-section">
             <p className="have-account-text">
-              Don't have an account?
+              Don&apos;t have an account?
               <a
                 className="sign-up"
                 onClick={() => navigate(ROUTES.SIGN_UP, { replace: false })}

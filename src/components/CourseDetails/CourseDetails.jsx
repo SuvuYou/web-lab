@@ -28,16 +28,14 @@ const CourseDetails = ({ professorName, subjectTitle, userType }) => {
                     setValue={setSubject}
                     label={"Subject Name"}
                   />
-                  <button className="submit-button hidden">
-                    Change Subject Name
-                  </button>
+                  <button className="submit-button">Change Subject Name</button>
                 </>
               )}
             </div>
             <div className="right-section">
               <span className="professor-name">{professorName}</span>
               {userType === "professor" && (
-                <button className="delete-button hidden">Delete Course</button>
+                <button className="delete-button">Delete Course</button>
               )}
             </div>
           </div>

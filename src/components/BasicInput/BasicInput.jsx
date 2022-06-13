@@ -1,4 +1,4 @@
-import example from "./BasicInput.scss";
+import "./BasicInput.scss";
 
 const BasicInput = ({ purpose, label, value, setValue, styles = {} }) => {
   const handleChange = (e) => {
