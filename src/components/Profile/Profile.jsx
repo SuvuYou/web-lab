@@ -12,6 +12,7 @@ import "./Profile.scss";
 const formatReuqests = (request) => {
   return {
     ...request.course,
+    requestId: request.join_request_id,
     status: request.status,
     student: request.student,
   };

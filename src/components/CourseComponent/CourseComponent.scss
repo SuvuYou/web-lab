@@ -3,6 +3,8 @@
 .course,
 .request,
 .course-to-join {
+  color: $dark-text;
+  text-decoration: none;
   max-width: 400px;
   display: flex;
   flex-wrap: wrap;

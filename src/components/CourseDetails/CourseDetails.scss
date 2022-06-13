@@ -17,7 +17,7 @@ body {
   }
 }
 
-.course {
+.course-details {
   display: flex;
   flex-wrap: wrap;
   box-shadow: 4px 4px 15px 0 rgb(214, 214, 214);
@@ -35,7 +35,7 @@ body {
   }
 }
 
-.submit-button {
+.submit-button-details {
   color: $gray;
   font-size: 14px;
   padding: 5px 15px;
@@ -52,7 +52,7 @@ body {
   }
 }
 
-.delete-button {
+.delete-button-details {
   color: $gray;
   font-size: 14px;
   padding: 5px 15px;
@@ -68,7 +68,7 @@ body {
   }
 }
 
-.course-info {
+.course-details-info {
   flex: 1;
   display: flex;
   justify-content: space-between;

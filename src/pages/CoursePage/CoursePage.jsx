@@ -44,6 +44,7 @@ const CoursePage = () => {
         userType={user.type}
         subjectTitle={course.subject}
         professorName={`${course.professor.first_name} ${course.professor.last_name}`}
+        courseId={course.course_id}
       />
     )
   );
