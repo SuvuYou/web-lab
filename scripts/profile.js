@@ -15,8 +15,6 @@ const subjectInput = document.querySelector("#subject");
 
 const BASE = "http://127.0.0.1:5000/";
 
-let userData = {};
-
 function createCourseElement(subject, first_name, last_name) {
   const c = document.createElement("div");
   c.classList.add("course");
@@ -179,8 +177,6 @@ async function checkLogin(token, user) {
   if (data.message) {
     return signOut();
   }
-
-  userData = data;
 }
 
 const token = localStorage.getItem("lab-token");

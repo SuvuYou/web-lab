@@ -40,7 +40,6 @@ function validateUserInput(user, userType) {
   );
 }
 
-const form = document.querySelector(".signup-form");
 const firstInput = document.querySelector("#first-name");
 const lastInput = document.querySelector("#last-name");
 const passwordInput = document.querySelector("#password");

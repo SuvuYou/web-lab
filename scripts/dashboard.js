@@ -18,8 +18,6 @@ let allCoursesToJoin = document.querySelectorAll(".course-to-join-active");
 
 const BASE = "http://127.0.0.1:5000/";
 
-let userData = {};
-
 function toggleForm() {
   addCourseForm.classList.toggle("hidden");
   overlay.classList.toggle("hidden");
@@ -186,8 +184,6 @@ async function checkLogin(token, user) {
   if (data.message) {
     return signOut();
   }
-
-  userData = data;
 }
 
 const token = localStorage.getItem("lab-token");
@@ -266,6 +262,6 @@ rightArrowCoursesToJoin.addEventListener("click", (e) => {
 
 addCourseForm
   .querySelector(".add-course-button")
-  .addEventListener("click", (e) => {
+  .addEventListener("click", () => {
     onCreateCourseSubmit(user, token);
   });
