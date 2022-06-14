@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useAuth() {
+export default function useToastr() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
 
