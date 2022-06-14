@@ -22,8 +22,8 @@ function App() {
   return (
     <ToastrContext.Provider value={{ setMessage, setShowMessage }}>
       <UserContext.Provider value={{ user, token, signOut, logIn }}>
-        {showMessage && message.trim() !== "" && <Toastr message={message} />}
         <Router>
+          {showMessage && message.trim() !== "" && <Toastr message={message} />}
           <Suspense fallback={<></>}>
             <Routes>
               <Route

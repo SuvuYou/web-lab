@@ -19,7 +19,7 @@ const Slider = ({ slides, type, onAddCourse, isDisabled = false }) => {
         />
       );
     }
-    console.log(slides);
+
     return slides.map((slide, index) => (
       <CourseComponent
         key={index}

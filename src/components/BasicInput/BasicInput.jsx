@@ -11,6 +11,7 @@ const BasicInput = ({ purpose, label, value, setValue, styles = {} }) => {
         {label}
       </div>
       <input
+        data-testid="input"
         type={purpose}
         className="input"
         value={value}
