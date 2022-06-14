@@ -3,6 +3,7 @@ import UserContext from "../../context/user-context";
 import { Link } from "react-router-dom";
 import "./CourseComponent.scss";
 import { JOIN_REQUESTS_ENDPOINT } from "../../constants/api-endpoint";
+import ToastrContext from "../../context/toastr-context";
 
 const config = {
   course: {
@@ -43,21 +44,25 @@ const CourseComponent = ({
   isDisabled = false,
 }) => {
   const { user, token } = useContext(UserContext);
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const [requestSended, setRequestSended] = useState(false);
 
   const changeStatus = async (newStatus) => {
     const endpoint = `${JOIN_REQUESTS_ENDPOINT}/${requestId}`;
 
-    const res = await fetch(endpoint, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify({ status: newStatus }),
-    });
-
-    console.log(res);
+    try {
+      await fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
+    }
   };
 
   const renderRequestBtn = () => (

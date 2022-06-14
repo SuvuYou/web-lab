@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { COURSES_LIST_ENDPOINT } from "../../constants/api-endpoint";
+import ToastrContext from "../../context/toastr-context";
 import UserContext from "../../context/user-context";
 import Header from "../Header/Header";
 import Slider from "../Slider/Slider";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { user, token } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
   const [freeCourses, setFreeCourses] = useState([]);
@@ -13,18 +15,23 @@ const Dashboard = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(COURSES_LIST_ENDPOINT, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
+      try {
+        const res = await fetch(COURSES_LIST_ENDPOINT, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      setFreeCourses(data?.free || []);
-      setJoinedCourses(data?.joined || []);
+        setFreeCourses(data?.free || []);
+        setJoinedCourses(data?.joined || []);
+      } catch (err) {
+        setMessage(err?.message || err?.message?.message);
+        setShowMessage(true);
+      }
     })();
   }, [token]);
 

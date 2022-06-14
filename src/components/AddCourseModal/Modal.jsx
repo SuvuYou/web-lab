@@ -3,9 +3,11 @@ import BasicInput from "../BasicInput/BasicInput";
 import { COURSES_ENDPOINT } from "../../constants/api-endpoint";
 import UserContext from "../../context/user-context";
 import "./Modal.scss";
+import ToastrContext from "../../context/toastr-context";
 
 const AddCourseModal = ({ onCloseModal }) => {
   const [subject, setSubject] = useState("");
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { user, token } = useContext(UserContext);
 
   const handleAddCourse = async () => {
@@ -16,16 +18,21 @@ const AddCourseModal = ({ onCloseModal }) => {
 
     const endpoint = `${COURSES_ENDPOINT}/0`;
 
-    await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify(course),
-    });
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(course),
+      });
 
-    onCloseModal();
+      onCloseModal();
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
+    }
   };
 
   return (

@@ -9,11 +9,13 @@ import BasicInput from "../BasicInput/BasicInput";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import * as ROUTES from "../../constants/routes";
 import "./EditUserForm.scss";
+import ToastrContext from "../../context/toastr-context";
 
 const isFieldValidated = (value) => value.trim() !== "";
 
 const EditUserForm = () => {
   const { user, token, signOut } = useContext(UserContext);
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const navigate = useNavigate();
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -43,23 +45,29 @@ const EditUserForm = () => {
       user.type === "student"
         ? `${STUDENTS_ENDPOINT}/${user.id}`
         : `${PROESSORS_ENDPOINT}/${user.id}`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
 
-    const res = await fetch(endpoint, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      if (data.message) {
+        setMessage(data?.message || data?.message?.message);
+        setShowMessage(true);
+        return;
+      }
 
-    if (data.message) {
-      return;
+      signOut();
+      navigate(ROUTES.LOGIN, { replace: false });
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
-
-    signOut();
-    navigate(ROUTES.LOGIN, { replace: false });
   };
 
   const handleUserChange = async (e) => {
@@ -98,22 +106,28 @@ const EditUserForm = () => {
     const endpoint = isStudent
       ? `${STUDENTS_ENDPOINT}/${user.id}`
       : `${PROESSORS_ENDPOINT}/${user.id}`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(newUserData),
+      });
 
-    const res = await fetch(endpoint, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify(newUserData),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
-
-    if (data.message) {
-      return;
+      if (data.message) {
+        setMessage(data?.message || data?.message?.message);
+        setShowMessage(true);
+        return;
+      }
+      resetFields();
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
-    resetFields();
   };
 
   return (

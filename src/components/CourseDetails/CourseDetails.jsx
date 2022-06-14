@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { COURSES_ENDPOINT } from "../../constants/api-endpoint";
 import * as ROUTES from "../../constants/routes";
+import ToastrContext from "../../context/toastr-context";
 import UserContext from "../../context/user-context";
 import BasicInput from "../BasicInput/BasicInput";
 import DeleteModal from "../DeleteModal/DeleteModal";
@@ -9,6 +10,7 @@ import Header from "../Header/Header";
 import "./CourseDetails.scss";
 
 const CourseDetails = ({ professorName, subjectTitle, userType, courseId }) => {
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -24,19 +26,26 @@ const CourseDetails = ({ professorName, subjectTitle, userType, courseId }) => {
     e.preventDefault();
 
     const endpoint = `${COURSES_ENDPOINT}/${courseId}`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
 
-    const res = await fetch(endpoint, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      if (data.message) {
+        setMessage(data?.message || data?.message?.message);
+        setShowMessage(true);
 
-    if (data.message) {
-      return;
+        return;
+      }
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
 
     navigate(ROUTES.DASHBOARD, { replace: true });
@@ -52,22 +61,29 @@ const CourseDetails = ({ professorName, subjectTitle, userType, courseId }) => {
     const newCourseData = { subject };
 
     const endpoint = `${COURSES_ENDPOINT}/${courseId}`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(newCourseData),
+      });
 
-    const res = await fetch(endpoint, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${token}`,
-      },
-      body: JSON.stringify(newCourseData),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      if (data.message) {
+        setMessage(data?.message || data?.message?.message);
+        setShowMessage(true);
 
-    if (data.message) {
-      return;
+        return;
+      }
+      resetFields();
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
-    resetFields();
   };
 
   return (

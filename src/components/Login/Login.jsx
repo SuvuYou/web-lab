@@ -5,11 +5,13 @@ import * as ROUTES from "../../constants/routes";
 import { LOGIN_ENDPOINT } from "../../constants/api-endpoint";
 import "./Login.scss";
 import UserContext from "../../context/user-context";
+import ToastrContext from "../../context/toastr-context";
 
 const isFieldValidated = (value) => value.trim() !== "";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { logIn } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
@@ -21,28 +23,32 @@ const Login = () => {
     if (!isFieldValidated(password) || !isFieldValidated(email)) {
       return;
     }
+    try {
+      const res = await fetch(LOGIN_ENDPOINT, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(`${email}:${password}`),
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+      });
+      const data = await res.json();
 
-    const res = await fetch(LOGIN_ENDPOINT, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(`${email}:${password}`),
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-    });
-    const data = await res.json();
+      if (data.message) {
+        setError(data.message);
+      }
 
-    if (data.message) {
-      setError(data.message);
-    }
-
-    if (data.token && data.token !== "") {
-      logIn(data.user, data.token);
-      navigate(ROUTES.DASHBOARD, { replace: false });
+      if (data.token && data.token !== "") {
+        logIn(data.user, data.token);
+        navigate(ROUTES.DASHBOARD, { replace: false });
+      }
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
   };
 

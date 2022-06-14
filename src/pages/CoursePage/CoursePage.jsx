@@ -2,10 +2,12 @@ import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router";
 import CourseDetails from "../../components/CourseDetails/CourseDetails";
 import { COURSES_ENDPOINT } from "../../constants/api-endpoint";
+import ToastrContext from "../../context/toastr-context";
 import UserContext from "../../context/user-context";
 
 const CoursePage = () => {
   const { course_id } = useParams();
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { user, token } = useContext(UserContext);
   const [course, setCourse] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +33,8 @@ const CoursePage = () => {
         const courseData = await res.json();
         setCourse(courseData);
       } catch (error) {
-        console.error(error);
+        setMessage(error?.message || error?.message?.message);
+        setShowMessage(true);
       } finally {
         setIsLoading(false);
       }
