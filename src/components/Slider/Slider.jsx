@@ -19,11 +19,13 @@ const Slider = ({ slides, type, onAddCourse, isDisabled = false }) => {
         />
       );
     }
-
+    console.log(slides);
     return slides.map((slide, index) => (
       <CourseComponent
         key={index}
         type={type}
+        courseId={slide.course_id}
+        requestId={slide.requestId}
         professorName={`${slide.professor.first_name} ${slide.professor.last_name}`}
         subject={slide.subject}
         studentName={`${slide.student?.first_name} ${slide.student?.last_name}`}

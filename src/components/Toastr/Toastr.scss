@@ -1,0 +1,16 @@
+@import "../../constants/colors";
+
+.toastr-container {
+  position: fixed;
+  right: 50px;
+  top: 150px;
+  background-color: white;
+  width: 250px;
+  min-height: 50px;
+  height: auto;
+  z-index: 5000;
+  border: 1px solid $rejected;
+  box-shadow: 1px 1px 10px -2px $rejected;
+  padding: 5px 10px;
+  cursor: pointer;
+}

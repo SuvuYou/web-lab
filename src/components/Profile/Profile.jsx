@@ -3,6 +3,7 @@ import {
   COURSES_LIST_ENDPOINT,
   REQUESTS_LIST_ENDPOINT,
 } from "../../constants/api-endpoint";
+import ToastrContext from "../../context/toastr-context";
 import UserContext from "../../context/user-context";
 import EditUserForm from "../EditUserForm/EditUserForm";
 import Header from "../Header/Header";
@@ -12,12 +13,14 @@ import "./Profile.scss";
 const formatReuqests = (request) => {
   return {
     ...request.course,
+    requestId: request.join_request_id,
     status: request.status,
     student: request.student,
   };
 };
 
 const Profile = () => {
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const { token } = useContext(UserContext);
   const [requests, setRequests] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -25,30 +28,35 @@ const Profile = () => {
 
   useEffect(() => {
     (async () => {
-      const [resCourses, resRequests] = await Promise.all([
-        fetch(COURSES_LIST_ENDPOINT, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-        }),
-        fetch(REQUESTS_LIST_ENDPOINT, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-        }),
-      ]);
+      try {
+        const [resCourses, resRequests] = await Promise.all([
+          fetch(COURSES_LIST_ENDPOINT, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${token}`,
+            },
+          }),
+          fetch(REQUESTS_LIST_ENDPOINT, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${token}`,
+            },
+          }),
+        ]);
 
-      const dataCourses = await resCourses.json();
-      const dataRequests = await resRequests.json();
+        const dataCourses = await resCourses.json();
+        const dataRequests = await resRequests.json();
 
-      setRequests(
-        dataRequests?.requests.map((course) => formatReuqests(course)) || []
-      );
-      setJoinedCourses(dataCourses?.joined || []);
+        setRequests(
+          dataRequests?.requests.map((course) => formatReuqests(course)) || []
+        );
+        setJoinedCourses(dataCourses?.joined || []);
+      } catch (err) {
+        setMessage(err?.message || err?.message?.message);
+        setShowMessage(true);
+      }
     })();
   }, [token]);
 

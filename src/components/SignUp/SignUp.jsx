@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BasicInput from "../BasicInput/BasicInput";
 import * as ROUTES from "../../constants/routes";
@@ -7,11 +7,13 @@ import {
   STUDENTS_ENDPOINT,
 } from "../../constants/api-endpoint";
 import "./SignUp.scss";
+import ToastrContext from "../../context/toastr-context";
 
 const isFieldValidated = (value) => value.trim() !== "";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
 
   const [isStudent, setIsStudent] = useState(true);
   const [firstName, setFirstName] = useState("");
@@ -59,23 +61,27 @@ const Login = () => {
     const endpoint = isStudent
       ? `${STUDENTS_ENDPOINT}/0`
       : `${PROESSORS_ENDPOINT}/0`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
 
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      if (data.message) {
+        setError(data.message);
+      }
 
-    if (data.message) {
-      setError(data.message);
-    }
-
-    if (data.email && email.token !== "") {
-      navigate(ROUTES.LOGIN, { replace: false });
+      if (data.email && email.token !== "") {
+        navigate(ROUTES.LOGIN, { replace: false });
+      }
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
     }
   };
 

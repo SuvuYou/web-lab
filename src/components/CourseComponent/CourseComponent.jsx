@@ -1,6 +1,9 @@
 import { useContext, useState } from "react";
 import UserContext from "../../context/user-context";
+import { Link } from "react-router-dom";
 import "./CourseComponent.scss";
+import { JOIN_REQUESTS_ENDPOINT } from "../../constants/api-endpoint";
+import ToastrContext from "../../context/toastr-context";
 
 const config = {
   course: {
@@ -33,14 +36,34 @@ const CourseComponent = ({
   type,
   professorName,
   subject,
-  onAddCourse = () => {},
+  courseId,
+  requestId,
+  onAddCourse = null,
   status = "",
   studentName = "",
   isDisabled = false,
 }) => {
-  const { user } = useContext(UserContext);
-
+  const { user, token } = useContext(UserContext);
+  const { setMessage, setShowMessage } = useContext(ToastrContext);
   const [requestSended, setRequestSended] = useState(false);
+
+  const changeStatus = async (newStatus) => {
+    const endpoint = `${JOIN_REQUESTS_ENDPOINT}/${requestId}`;
+
+    try {
+      await fetch(endpoint, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
+    }
+  };
 
   const renderRequestBtn = () => (
     <button
@@ -57,18 +80,35 @@ const CourseComponent = ({
     ) : (
       <div className="request-form">
         <span className="student-name">{studentName}</span>
-        <button className="request-form-btn" id="approve">
+        <button
+          className="request-form-btn"
+          id="approve"
+          onClick={() => {
+            changeStatus("success");
+          }}
+        >
           Approve
         </button>
-        <button className="request-form-btn" id="reject">
+        <button
+          className="request-form-btn"
+          id="reject"
+          onClick={() => {
+            changeStatus("error");
+          }}
+        >
           Reject
         </button>
       </div>
     );
 
   return (
-    <div
-      onClick={() => onAddCourse()}
+    <Link
+      to={onAddCourse || type !== "course" ? "#" : `/course/${courseId}`}
+      onClick={() => {
+        if (onAddCourse) {
+          onAddCourse();
+        }
+      }}
       className={`${config[type].class} ${
         config[type].renderDisabled && isDisabled ? "over" : ""
       }`}
@@ -83,7 +123,7 @@ const CourseComponent = ({
         <p className="disabled-text">Add Course</p>
       )}
       {config[type].renderStatus && renderRequestsStatus(status, studentName)}
-    </div>
+    </Link>
   );
 };
 
