@@ -47,6 +47,30 @@ const CourseComponent = ({
   const { setMessage, setShowMessage } = useContext(ToastrContext);
   const [requestSended, setRequestSended] = useState(false);
 
+  const sendRequest = async () => {
+    const endpoint = `${JOIN_REQUESTS_ENDPOINT}/0`;
+
+    const requestBody = {
+      status: "pending",
+      student_id: user.id,
+      course_id: courseId,
+    };
+
+    try {
+      await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+    } catch (err) {
+      setMessage(err?.message || err?.message?.message);
+      setShowMessage(true);
+    }
+  };
+
   const changeStatus = async (newStatus) => {
     const endpoint = `${JOIN_REQUESTS_ENDPOINT}/${requestId}`;
 
@@ -67,7 +91,10 @@ const CourseComponent = ({
 
   const renderRequestBtn = () => (
     <button
-      onClick={() => setRequestSended(true)}
+      onClick={() => {
+        setRequestSended(true);
+        sendRequest();
+      }}
       className={`request-btn ${requestSended && "request-sended"}`}
     >
       {!requestSended ? "Send Request" : "Request sended"}
